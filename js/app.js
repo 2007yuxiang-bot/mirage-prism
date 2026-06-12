@@ -20,15 +20,19 @@ const XIVAPI          = 'https://v2.xivapi.com';
 const SUPABASE_URL     = 'https://asfxnvkowtaewijzdrrv.supabase.co';
 const SUPABASE_KEY     = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZnhudmtvd3RhZXdpanpkcnJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNTE4MjIsImV4cCI6MjA5NjgyNzgyMn0.ZVE001GMeEil6lZxK0jL9j3prQqnKFuhOexqsLY207w';
 
-let supabase = null;
-if (typeof window !== 'undefined' && window.supabase && window.supabase.createClient) {
-  if (SUPABASE_URL && SUPABASE_KEY && !SUPABASE_URL.includes('YOUR_') && SUPABASE_URL.trim() !== '') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// '_db' 是我們的 Supabase 客戶端實例，刻意避免與 CDN 的全域 'supabase' 物件命名衝突
+let _db = null;
+try {
+  if (typeof supabase !== 'undefined' && supabase.createClient &&
+      SUPABASE_URL && SUPABASE_KEY && !SUPABASE_URL.includes('YOUR_') && SUPABASE_URL.trim() !== '') {
+    _db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   }
+} catch (e) {
+  console.warn('[Supabase] SDK not loaded, falling back to LocalStorage:', e);
 }
 
 function isSupabaseConfigured() {
-  return supabase !== null;
+  return _db !== null;
 }
 
 const SLOTS = [
@@ -1232,7 +1236,7 @@ function bindEvents() {
    SUPABASE CLOUD DATABASE API
 ════════════════════════════════════════════════ */
 async function apiFetchPosts() {
-  const { data, error } = await supabase
+  const { data, error } = await _db
     .from('posts')
     .select('*');
   if (error) throw error;
@@ -1240,14 +1244,14 @@ async function apiFetchPosts() {
 }
 
 async function apiCreatePost(post) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .insert([post]);
   if (error) throw error;
 }
 
 async function apiUpdatePost(id, post) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .update(post)
     .eq('id', id);
@@ -1255,7 +1259,7 @@ async function apiUpdatePost(id, post) {
 }
 
 async function apiUpdateLikes(id, likes) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .update({ likes })
     .eq('id', id);
@@ -1263,7 +1267,7 @@ async function apiUpdateLikes(id, likes) {
 }
 
 async function apiReportPost(id, reported, reportCount, reportReasons, reportReason) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .update({
       reported,
@@ -1276,7 +1280,7 @@ async function apiReportPost(id, reported, reportCount, reportReasons, reportRea
 }
 
 async function apiDismissReport(id) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .update({
       reported: false,
@@ -1289,7 +1293,7 @@ async function apiDismissReport(id) {
 }
 
 async function apiDeletePost(id) {
-  const { error } = await supabase
+  const { error } = await _db
     .from('posts')
     .delete()
     .eq('id', id);
