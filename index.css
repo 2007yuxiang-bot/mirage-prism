@@ -33,7 +33,7 @@ body {
     radial-gradient(ellipse at 20% 10%, rgba(101,199,215,.07) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 90%, rgba(215,184,106,.05) 0%, transparent 50%),
     var(--bg);
-  overflow: hidden;
+  overflow-y: auto;
 }
 button, input, select { font: inherit; cursor: pointer; }
 input { cursor: text; }
@@ -129,7 +129,7 @@ img { display: block; }
 ════════════════════════════════════════════════ */
 .app-container {
   height: calc(100vh - var(--header-h));
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
