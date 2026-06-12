@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#eaf4f8" stop-opacity="0.97"/>
+      <stop offset="100%" stop-color="#c8dce6" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="shadowGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b8d0dc" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8aaec0" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="softGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dropShadow">
+      <feDropShadow dx="2" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- ══════════ FEMALE MANNEQUIN ══════════ -->
+  <g id="mannequin-female" filter="url(#dropShadow)">
+    <!-- Head -->
+    <ellipse cx="100" cy="46" rx="20" ry="24"
+      fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Neck -->
+    <rect x="94" y="68" width="12" height="16" rx="4"
+      fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Torso - feminine hourglass shape -->
+    <path d="
+      M 78,84 C 72,100 70,118 74,138 C 76,148 78,158 76,168 C 74,178 72,190 76,200 C 79,208 88,214 100,214 C 112,214 121,208 124,200 C 128,190 126,178 124,168 C 122,158 124,148 126,138 C 130,118 128,100 122,84 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1.2"/>
+
+    <!-- Chest highlight (feminine) -->
+    <ellipse cx="90" cy="104" rx="9" ry="10" fill="url(#shadowGrad)" opacity="0.4"/>
+    <ellipse cx="110" cy="104" rx="9" ry="10" fill="url(#shadowGrad)" opacity="0.4"/>
+
+    <!-- Left arm - slender -->
+    <path d="
+      M 78,86 C 74,90 68,100 63,118 C 59,132 55,150 53,168 C 51,182 50,196 50,204 C 50,210 48,214 47,212 C 45,204 46,186 48,168 C 50,146 55,124 60,106 C 64,92 70,82 75,82 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Left hand -->
+    <ellipse cx="47" cy="216" rx="6" ry="8" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Right arm - slender -->
+    <path d="
+      M 122,86 C 126,90 132,100 137,118 C 141,132 145,150 147,168 C 149,182 150,196 150,204 C 150,210 152,214 153,212 C 155,204 154,186 152,168 C 150,146 145,124 140,106 C 136,92 130,82 125,82 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Right hand -->
+    <ellipse cx="153" cy="216" rx="6" ry="8" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Hips and pelvis -->
+    <path d="
+      M 76,200 C 72,210 70,222 72,234 L 128,234 C 130,222 128,210 124,200 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+
+    <!-- Left leg -->
+    <path d="
+      M 72,234 C 70,260 70,290 72,320 C 73,348 75,378 76,408 C 77,428 78,448 78,460 C 78,465 82,468 86,466 C 89,464 90,460 90,454 C 90,440 88,416 87,390 C 85,358 84,326 84,298 C 84,270 84,246 84,234 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Left foot -->
+    <path d="M 76,462 C 73,468 70,472 72,476 C 74,480 82,480 88,478 C 92,476 92,470 90,466 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Right leg -->
+    <path d="
+      M 128,234 C 130,260 130,290 128,320 C 127,348 125,378 124,408 C 123,428 122,448 122,460 C 122,465 118,468 114,466 C 111,464 110,460 110,454 C 110,440 112,416 113,390 C 115,358 116,326 116,298 C 116,270 116,246 116,234 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Right foot -->
+    <path d="M 124,462 C 127,468 130,472 128,476 C 126,480 118,480 112,478 C 108,476 108,470 110,466 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Miqo'te cat ears (female) -->
+    <g id="fem-ears" style="display:none">
+      <path d="M 84,28 L 76,8 C 75,5 78,5 80,8 L 92,24 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 116,28 L 124,8 C 125,5 122,5 120,8 L 108,24 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+    <!-- Miqo'te tail (female) -->
+    <path id="fem-tail" style="display:none" d="M 88,220 C 76,240 64,268 58,296 C 54,316 55,340 62,355 C 66,363 72,364 76,358 C 78,352 74,340 72,326 C 70,308 76,284 86,262 C 90,252 92,240 90,228 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+
+    <!-- Viera bunny ears (female) -->
+    <g id="fem-viera-ears" style="display:none">
+      <path d="M 90,22 C 88,8 86,-10 88,-26 C 89,-32 94,-32 95,-26 C 97,-10 96,8 94,22 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 110,22 C 112,8 114,-10 112,-26 C 111,-32 106,-32 105,-26 C 103,-10 104,8 106,22 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+
+    <!-- Aura horns (female) -->
+    <g id="fem-aura-horns" style="display:none">
+      <path d="M 86,28 C 82,20 80,10 84,2 C 85,-1 88,0 88,4 C 88,10 89,18 90,26 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 114,28 C 118,20 120,10 116,2 C 115,-1 112,0 112,4 C 112,10 111,18 110,26 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- ══════════ MALE MANNEQUIN ══════════ -->
+  <g id="mannequin-male" style="display:none" filter="url(#dropShadow)">
+    <!-- Head - slightly squarer -->
+    <path d="M 80,22 C 80,14 88,8 100,8 C 112,8 120,14 120,22 L 120,54 C 120,64 112,70 100,70 C 88,70 80,64 80,54 Z"
+      fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Neck - broader -->
+    <rect x="92" y="70" width="16" height="16" rx="4"
+      fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Torso - broad shoulders, tapered waist (male V-shape) -->
+    <path d="
+      M 68,86 C 62,104 62,124 66,148 C 68,162 70,174 72,188 C 74,200 76,212 78,224 L 122,224 C 124,212 126,200 128,188 C 130,174 132,162 134,148 C 138,124 138,104 132,86 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1.2"/>
+
+    <!-- Chest highlight (masculine pecs) -->
+    <ellipse cx="90" cy="110" rx="13" ry="11" fill="url(#shadowGrad)" opacity="0.35"/>
+    <ellipse cx="110" cy="110" rx="13" ry="11" fill="url(#shadowGrad)" opacity="0.35"/>
+
+    <!-- Left arm - muscular, broader -->
+    <path d="
+      M 68,88 C 62,94 54,108 48,128 C 43,144 39,164 38,182 C 37,196 37,210 37,218 C 37,224 35,228 34,226 C 32,216 32,196 34,174 C 36,148 42,120 50,100 C 56,84 63,78 68,82 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Left hand -->
+    <ellipse cx="34" cy="230" rx="7" ry="9" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Right arm - muscular -->
+    <path d="
+      M 132,88 C 138,94 146,108 152,128 C 157,144 161,164 162,182 C 163,196 163,210 163,218 C 163,224 165,228 166,226 C 168,216 168,196 166,174 C 164,148 158,120 150,100 C 144,84 137,78 132,82 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Right hand -->
+    <ellipse cx="166" cy="230" rx="7" ry="9" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Hips and pelvis (narrower than female) -->
+    <path d="
+      M 78,224 C 74,234 72,246 74,256 L 126,256 C 128,246 126,234 122,224 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+
+    <!-- Left leg - thicker -->
+    <path d="
+      M 74,256 C 70,278 70,308 72,336 C 73,362 76,390 78,420 C 79,440 80,458 80,468 C 80,473 84,476 88,474 C 92,472 93,467 92,460 C 91,446 89,420 88,392 C 86,360 84,328 82,298 C 80,270 78,258 78,256 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Left foot -->
+    <path d="M 72,468 C 69,474 67,480 70,484 C 73,488 82,488 88,485 C 93,483 93,476 90,470 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Right leg - thicker -->
+    <path d="
+      M 126,256 C 130,278 130,308 128,336 C 127,362 124,390 122,420 C 121,440 120,458 120,468 C 120,473 116,476 112,474 C 108,472 107,467 108,460 C 109,446 111,420 112,392 C 114,360 116,328 118,298 C 120,270 122,258 122,256 Z
+    " fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    <!-- Right foot -->
+    <path d="M 128,468 C 131,474 133,480 130,484 C 127,488 118,488 112,485 C 107,483 107,476 110,470 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="0.8"/>
+
+    <!-- Miqo'te cat ears (male) -->
+    <g id="male-ears" style="display:none">
+      <path d="M 84,14 L 76,-6 C 75,-9 78,-9 80,-6 L 92,10 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 116,14 L 124,-6 C 125,-9 122,-9 120,-6 L 108,10 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+    <!-- Miqo'te tail (male) -->
+    <path id="male-tail" style="display:none" d="M 82,232 C 70,252 56,280 50,310 C 46,330 47,354 55,368 C 59,376 66,376 70,368 C 72,362 68,350 66,336 C 64,316 70,290 80,266 C 84,256 86,242 84,230 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+
+    <!-- Viera bunny ears (male) -->
+    <g id="male-viera-ears" style="display:none">
+      <path d="M 90,10 C 88,-4 86,-22 88,-38 C 89,-44 94,-44 95,-38 C 97,-22 96,-4 94,10 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 110,10 C 112,-4 114,-22 112,-38 C 111,-44 106,-44 105,-38 C 103,-22 104,-4 106,10 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+
+    <!-- Aura horns (male) -->
+    <g id="male-aura-horns" style="display:none">
+      <path d="M 86,14 C 80,4 78,-8 83,-18 C 85,-22 88,-20 88,-16 C 88,-8 89,2 90,12 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+      <path d="M 114,14 C 120,4 122,-8 117,-18 C 115,-22 112,-20 112,-16 C 112,-8 111,2 110,12 Z" fill="url(#bodyGrad)" stroke="#a8cdd9" stroke-width="1"/>
+    </g>
+  </g>
+
+  <!-- ══════════ SLOT GLOW ZONES (both genders) ══════════ -->
+  <g id="svg-glow-zones">
+    <!-- head slot -->
+    <circle id="svg-glow-head" cx="100" cy="46" r="18" fill="none" stroke="#d7b86a" stroke-width="2.5" opacity="0"/>
+    <!-- body slot -->
+    <circle id="svg-glow-body" cx="100" cy="155" r="30" fill="none" stroke="#d7b86a" stroke-width="2.5" opacity="0"/>
+    <!-- hands slot -->
+    <circle id="svg-glow-hands" cx="44" cy="220" r="14" fill="none" stroke="#d7b86a" stroke-width="2" opacity="0"/>
+    <!-- legs slot -->
+    <circle id="svg-glow-legs" cx="100" cy="340" r="22" fill="none" stroke="#d7b86a" stroke-width="2" opacity="0"/>
+    <!-- feet slot -->
+    <circle id="svg-glow-feet" cx="100" cy="460" r="16" fill="none" stroke="#d7b86a" stroke-width="2" opacity="0"/>
+    <!-- weapon slot -->
+    <circle id="svg-glow-weapon" cx="166" cy="200" r="14" fill="none" stroke="#65c7d7" stroke-width="2" opacity="0"/>
+  </g>
+</svg>

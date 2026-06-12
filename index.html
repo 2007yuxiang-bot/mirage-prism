@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIRAGE PRISM | FF14 幻化分享平台</title>
+  <meta name="description" content="FF14 繁中服幻化搭配與分享社群，上傳截圖、搜尋全遊戲裝備、發布穿搭套裝。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Cinzel:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+
+  <!-- ─── Header ─── -->
+  <header class="app-header">
+    <div class="brand">
+      <i class="fa-solid fa-gem"></i>
+      <div>
+        <h1>MIRAGE PRISM</h1>
+        <span>FF14 繁中服幻化平台</span>
+      </div>
+    </div>
+
+    <div class="view-switch">
+      <button class="view-tab active" id="tab-gallery">
+        <i class="fa-solid fa-images"></i><span>幻化大廳</span>
+      </button>
+      <button class="view-tab" id="tab-favorites">
+        <i class="fa-solid fa-star"></i><span>收藏夾</span>
+      </button>
+      <button class="view-tab" id="btn-my-glamours">
+        <i class="fa-solid fa-user-gear"></i><span>我的幻化</span>
+      </button>
+      <button class="view-tab" id="tab-editor">
+        <i class="fa-solid fa-plus-circle"></i><span>發布穿搭</span>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <div id="editor-actions" style="display:none; gap:8px; align-items:center;">
+        <button class="icon-button text-button" id="btn-reset" title="清空所有綁定裝備">
+          <i class="fa-solid fa-rotate-left"></i><span>重置</span>
+        </button>
+      </div>
+      <button class="icon-button text-button" id="btn-admin" title="管理員後台">
+        <i class="fa-solid fa-screwdriver-wrench"></i><span>後台</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+
+    <!-- ════════════════════════════════════
+         SECTION A: GALLERY VIEW
+    ════════════════════════════════════ -->
+    <div id="gallery-container" class="gallery-container">
+      <section class="gallery-hero">
+        <h2>✦ EORZEA GLAMOURS ✦</h2>
+        <p>探索光之戰士的時尚穿搭方案</p>
+      </section>
+
+      <section class="gallery-filter-bar">
+        <div class="search-row">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="gallery-search" class="search-input" placeholder="搜尋套裝名稱...">
+        </div>
+        <div class="filter-controls" style="display: flex; gap: 8px;">
+          <select id="gallery-role-filter">
+            <option value="全部">所有職能</option>
+            <option value="坦克">坦克</option>
+            <option value="治療">治療</option>
+            <option value="近戰輸出">近戰輸出</option>
+            <option value="遠程物理">遠程物理</option>
+            <option value="法系輸出">法系輸出</option>
+            <option value="通用">通用</option>
+          </select>
+          <select id="gallery-sort-filter">
+            <option value="newest">最新發布</option>
+            <option value="most_liked">最熱門 (總推薦)</option>
+            <option value="monthly">本月最熱門</option>
+            <option value="weekly">本週最熱門</option>
+          </select>
+          <button id="btn-refresh-gallery" class="icon-button text-button" title="同步最新資料" style="height: 34px; padding: 0 10px; margin-top: 2px;">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+        </div>
+      </section>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Dynamic glamour cards rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION D: MY GLAMOURS VIEW
+    ════════════════════════════════════ -->
+    <div id="my-glamours-container" class="gallery-container" style="display:none;">
+      <section class="gallery-hero">
+        <h2>✦ MY GLAMOURS ✦</h2>
+        <p>管理您上傳的個人幻化穿搭方案</p>
+      </section>
+
+      <div class="gallery-grid" id="my-glamours-grid">
+        <!-- User's published cards rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION B: EDITOR (CREATE POST) VIEW
+    ════════════════════════════════════ -->
+    <div id="editor-container" class="workspace-editor" style="display:none;">
+      <div class="workspace">
+
+        <!-- ── Left Panel: Post Info + Bound Gear ── -->
+        <aside class="side-panel left-panel">
+
+          <section class="panel-section">
+            <div class="section-title"><i class="fa-solid fa-pen-nib"></i><span>分享資訊</span></div>
+            <label class="field-label">套裝名稱</label>
+            <input id="save-name-input" class="text-input" maxlength="24" placeholder="輸入套裝名稱（最多24字）">
+
+            <label class="field-label">搭配職能</label>
+            <select id="editor-role-select">
+              <option value="坦克">坦克 (PLD, WAR, DRK, GNB)</option>
+              <option value="治療">治療 (WHM, SCH, AST, SGE)</option>
+              <option value="近戰輸出">近戰輸出 (MNK, SAM, NIN, RPR, VPR)</option>
+              <option value="遠程物理">遠程物理 (BRD, MCH, DNC)</option>
+              <option value="法系輸出">法系輸出 (BLM, SMN, RDM, PCT)</option>
+              <option value="通用">通用 (All Classes)</option>
+            </select>
+          </section>
+
+          <section class="panel-section">
+            <div class="section-title"><i class="fa-solid fa-user-gear"></i><span>模特設定</span></div>
+            <label class="field-label">種族</label>
+            <div class="race-options" id="race-group" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+              <button class="btn-option active" data-race="hyur">人族</button>
+              <button class="btn-option" data-race="miqo">貓魅族</button>
+              <button class="btn-option" data-race="lala">拉拉菲爾族</button>
+              <button class="btn-option" data-race="elezen">精靈族</button>
+              <button class="btn-option" data-race="roe">魯加族</button>
+              <button class="btn-option" data-race="aura">敖龍族</button>
+              <button class="btn-option" data-race="hroth">硌獅族</button>
+              <button class="btn-option" data-race="viera">維艾拉族</button>
+            </div>
+            <label class="field-label">性別</label>
+            <div class="segmented gender-seg" id="gender-group">
+              <button class="segment active" data-gender="female">女性</button>
+              <button class="segment" data-gender="male">男性</button>
+            </div>
+          </section>
+
+          <section class="panel-section grow">
+            <div class="section-title"><i class="fa-solid fa-tags"></i><span>綁定裝備</span></div>
+            <div class="equipped-list" id="equipped-list">
+              <!-- Dynamic slot rows -->
+            </div>
+          </section>
+
+          <section class="publish-section">
+            <button class="publish-btn" id="btn-save-set">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>發布幻化至大廳</span>
+            </button>
+          </section>
+
+        </aside>
+
+        <!-- ── Centre: Screenshot Upload Zone ── -->
+        <main class="stage">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-prompt" id="upload-prompt">
+              <i class="fa-solid fa-camera-retro"></i>
+              <span>拖曳或點擊上傳遊戲截圖</span>
+              <small>JPG / PNG · 建議使用 9:16 直式截圖</small>
+            </div>
+            <input type="file" id="screenshot-input" accept="image/*" style="display:none;">
+            <img id="screenshot-preview" alt="Screenshot Preview" style="display:none;">
+            <button class="remove-screenshot-btn" id="btn-remove-screenshot" style="display:none;" title="移除截圖">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+
+          <div class="stage-summary">
+            <div class="summary-text">
+              <strong id="summary-title">尚未命名的幻化</strong>
+              <span id="summary-meta">在右側搜尋並綁定裝備，上傳截圖後發布</span>
+            </div>
+            <div class="slot-pips" id="slot-pips">
+              <!-- Dynamic slot pip indicators -->
+            </div>
+          </div>
+        </main>
+
+        <!-- ── Right Panel: XIVAPI Gear Search ── -->
+        <aside class="side-panel right-panel">
+
+          <!-- Slot Tabs -->
+          <div class="slot-tabs" id="slot-tabs">
+            <!-- Dynamic slot tabs built by JS -->
+          </div>
+          <div class="slot-hint" id="slot-hint">點選插槽 → 搜尋裝備 → 點擊綁定</div>
+
+          <!-- Search Box -->
+          <section class="search-section">
+            <div id="api-error-notice" style="display: none; align-items: center; gap: 8px; color: #ff6b6b; font-size: 12px; margin-bottom: 8px; background: rgba(255, 107, 107, 0.1); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255, 107, 107, 0.25);">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <p style="margin: 0;"></p>
+            </div>
+            <div class="search-row">
+              <i class="fa-solid fa-globe"></i>
+              <input id="search-input" class="search-input" placeholder="搜尋裝備（英文名）e.g. Neo-Ishgardian">
+              <button id="btn-search" class="search-btn" title="搜尋 XIVAPI">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="api-badge">
+              <i class="fa-solid fa-database"></i> 資料來源：XIVAPI · 按 Enter 或點擊箭頭搜尋
+            </div>
+          </section>
+
+          <div class="gear-count" id="gear-count"></div>
+          <div class="gear-list" id="gear-list">
+            <div class="empty-state">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>搜尋 FF14 全遊戲裝備</span>
+              <small>輸入英文裝備名稱開始搜尋，<br>例如：Neo-Ishgardian、Calfskin Rider</small>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         SECTION C: ADMIN PANEL VIEW
+    ════════════════════════════════════ -->
+    <div id="admin-container" class="admin-container" style="display:none;">
+      <section class="admin-hero">
+        <h2>⚙️ 管理員審核後台</h2>
+        <p>此處列出所有被檢舉的貼文，管理員可進行審核與一鍵刪除。</p>
+      </section>
+      
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>穿搭縮圖</th>
+              <th>套裝名稱</th>
+              <th>搭配職能</th>
+              <th>發布日期</th>
+              <th>檢舉原因</th>
+              <th>操作動作</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body">
+            <!-- Reported rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── Fullscreen Detail Modal ─── -->
+  <div class="modal detail-modal" id="detail-modal" aria-hidden="true">
+    <div class="detail-panel">
+      <button class="close-modal-btn" id="close-detail-modal" title="關閉">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="detail-content-wrapper">
+        <!-- Left: Outfit Screenshot -->
+        <div class="detail-visual">
+          <img id="detail-image" src="" alt="Glamour Outfit Screenshot" style="display:none;">
+          <div class="detail-visual-placeholder" id="detail-visual-placeholder"></div>
+        </div>
+
+        <!-- Right: Outfit Info -->
+        <div class="detail-info">
+          <div class="detail-header-block">
+            <div class="detail-meta-row">
+              <span class="detail-role-badge" id="detail-role">職能</span>
+              <span class="detail-date" id="detail-date">
+                <i class="fa-solid fa-clock"></i>
+              </span>
+            </div>
+            <h2 id="detail-title-text">套裝名稱</h2>
+            <div class="detail-author" id="detail-author">
+              <i class="fa-solid fa-user-circle"></i><span>光之戰士</span>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3><i class="fa-solid fa-shirt"></i> 裝備搭配明細</h3>
+            <div class="detail-gear-list" id="detail-gear-list">
+              <!-- Dynamic gear rows -->
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button class="like-post-btn" id="btn-like-post">
+              <i class="fa-solid fa-heart"></i>
+              <span id="detail-likes-text">推薦此幻化 (0)</span>
+            </button>
+            <button class="fav-post-btn" id="btn-fav-post" title="收藏">
+              <i class="fa-regular fa-star"></i>
+              <span id="detail-fav-text">收藏</span>
+            </button>
+            <button class="report-post-btn" id="btn-report-post" title="檢舉此穿搭">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status"></div>
+
+  <!-- Supabase CDN Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- App Script (self-contained, no gearData.js needed) -->
+  <script src="./js/app.js"></script>
+</body>
+</html>
